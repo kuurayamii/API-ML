@@ -9,8 +9,6 @@ def Preprocesado_Imagen(imagen: Image.Image, input_size=(224,224)):
     
     image_array /= 255.0
 
-    image_array = np.transpose(image_array, (2,0,1))
-
     image_array = np.expand_dims(image_array, axis=0)
 
     return image_array
