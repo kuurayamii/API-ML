@@ -1,5 +1,6 @@
 #Las librerias utilizadas para el desarrollo de la API
 from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import onnxruntime as ort
 import numpy as np
@@ -10,6 +11,18 @@ from utils import Preprocesado_Imagen
 
 #Se inicializa FastAPI para poder realizar lo necesario para esta
 api = FastAPI()
+
+origins = [
+    "*"
+]
+
+api.add_middleware(
+    CORSMiddleware,
+    allow_origins = origins,
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"],
+)
 
 #Se inicializa onnx runtime con la url de donde se encuentra actualmente el modelo
 ort_session = ort.InferenceSession("modelo/modelo_reconocimiento_digimon.onnx")
